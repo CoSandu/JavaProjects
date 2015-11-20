@@ -1,0 +1,86 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+</head>
+<body>
+<h1 style="text-align: center;">Impresa di pulizie</h1>
+<br>
+Progettare ed implementare un programma che consenta ad una o pi&ugrave; imprese di pulizie di gestire le informazioni relative ai propri 
+dipendenti e ai condomini dei quali hanno in gestione la pulizia. 
+Tutte le classi devono appartenere al package <code><B>impresa</B></code>.
+<p>
+Il programma interagisce attraverso istanze della classe <code><B>Impresa</B></code>.
+
+<h2>R1. Impresa</h2>
+
+La classe principale con cui interagire &egrave; <code><B>Impresa</B></code>, che riceve come parametro del costruttore il 
+nome dell'impresa di pulizie, l'indirizzo, il cap e la citt&agrave;.<br>
+Il nome dell'impresa, l'indirizzo, il cap e la citt&agrave; sono leggibili tramite i rispettivi metodi getter <code><B>getNome()</B></code>, <code><B>getIndirizzo()</B></code>, <code><B>getCap()</B></code> e <code><B>getCitta()</B></code>.<br>
+
+&Egrave; possibile definire il nome del proprietario dell'impresa tramite il metodo
+<code><B>setProprietario()</B></code>, che riceve come parametri nome e cognome del proprietario (si assuma che un'impresa possa avere un solo proprietario alla volta).<br>
+Il metodo <code><B>getProprietario()</B></code> restituisce nome e cognome del proprietario
+separati da uno spazio (carattere ' ').<br>
+    
+<i>Ad esempio: "<code>Linda Bianchi</code>"</i>    <br>
+
+<h2>R2. Dipendenti</h2>
+
+L'impresa memorizza informazioni relative ai propri dipendenti. 
+Le informazioni relative a un nuovo dipendente vengono memorizzate tramite il metodo <code><B>assumiDipendente()</B></code> della classe <code><B>Impresa</B></code>, che riceve come parametri
+il nome del dipendente, il cognome e lo stipendio; il metodo restituisce il codice identificativo numerico che &egrave; 
+stato assegnato al dipendente.
+<BR>
+I codici identificativi vengono assegnati in maniera progressiva per ogni impresa a partire dal numero 1. 
+<br>
+Si assuma che ciascuna impresa non possa avere pi&ugrave; di 50 dipendenti.
+<br>
+Per ottenere le informazioni relative ad un dipendente &egrave; possibile utilizzare il metodo <code><B>dipendente()</B></code>, che riceve come parametro 
+il codice numerico del dipendente e restituisce una stringa composta da codice, nome, cognome e stipendio separati da uno spazio.
+<bR>
+N.B. all'inizio e alla fine della stringa NON devono essere presenti spazi, ne' altri caratteri.<br>
+<i>Ad esempio: "<code>1 Marco Rossi 40000.0</code>"</i>    <br>
+
+<h2>R3. Condomini</h2>
+
+Quando viene presa la gestione delle pulizie di un nuovo condominio, si utilizza il metodo <code><B>aggiungiCondominio()</B></code>, che riceve come 
+parametri l'indirizzo, il cap e la citt&agrave; del condominio. Il metodo restituisce un
+intero che corrisponde al codice del condominio. 
+<br>I codici dei condomini vengono assegnati progressivamente a 
+partire da 100.
+<br>
+Si assuma che ciascuna impresa non possa avere in gestione pi&ugrave; di 200 condomini.
+<br>
+Per conoscere le informazioni relative ad un condominio si usa il metodo <code><B>condominio()</B></code>, che riceve 
+come parametro il codice del condominio e restituisce una stringa contenente codice, indirizzo, cap e citt&agrave;, nello stesso formato specificato per il metodo <code><B>dipendente()</B></code>.
+<br>
+
+<h2>R4. Assegnazioni dipendenti-condomini</h2>
+
+I dipendenti dell'impresa effettuano pulizie in uno o pi&ugrave; condomini. Essi possono essere assegnati a un condominio tramite il metodo <code><B>assegna()</B></code>, che 
+riceve come parametro il codice del dipendente ed il codice del condominio a cui assegnarlo.
+<br>
+Si assuma che ciascun dipendente non possa essere assegnato a pi&ugrave; di 10 condomini 
+e che un condominio non possa avere pi&ugrave; di 4 dipendenti ad esso assegnati.
+<br>
+Per ottenere l'elenco dei dipendenti che effettuano le pulizie presso un condominio &egrave; disponibile il metodo
+<code><B>elencoDipendenti()</B></code> della classe <code><B>Impresa</B></code>, che riceve come parametro il codice del condominio e restituisce una
+stringa contenente l'elenco dei dipendenti ad esso assegnati. I dipendenti compaiono uno per riga (le righe, tranne l'ultima, sono terminate da un carattere a-capo '\n') secondo
+il formato descritto al punto R2.
+<br>
+Dato il codice di un dipendente, tramite il metodo <code><B>elencoCondomini()</B></code> &egrave; possibile conoscere
+l'elenco dei condomini a cui questo &egrave; assegnato. I condomini compaiono anch'essi uno per riga (le righe, tranne l'ultima, sono terminate da un carattere a-capo '\n'), secondo il formato descritto al punto R3.
+<br>
+In modo analogo ai metodi <code><B>elencoDipendenti()</B></code> e <code><B>elencoCondomini()</B></code>, i metodi  <code><B>numeroDipendenti()</B></code> e <code><B>numeroCondomini()</B></code> ricevono rispettivamente come parametri il codice di un condominio e di un dipendente, e restituiscono, nel primo caso un intero relativo al numero di dipendenti assegnati a un determinato condominio, e nel secondo il numero di condomini ai quali &egrave; stato assegnato un determinato dipendente.
+<br>
+Mediante i metodi <code><B>elencoDipendentiSenzaCondomini()</B></code> ed <code><B>elencoCondominiSenzaDipendenti()</B></code>
+&egrave; possibile stampare rispettivamente i dipendenti attualmente non assegnati ad alcun condominio ed i condomini cui non sono ancora stati
+assegnati dipendenti (nello stesso formato specificato per i metodi <code><B>elencoDipendenti()</B></code> e <code><B>elencoCondomini()</B></code>). <br><br>
+<i>NB: si ricorda che, per problemi legati alla codifica di caratteri speciali, l'utilizzo di classi, attributi o metodi contenenti lettere accentate deve essere evitato.</i>
+
+    
+<hr style="width: 100%; height: 2px;"><br>
+
+
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+</head>
+<body>
+<h1 style="text-align: center;">Computer</h1>
+<br>
+Progettare ed implementare un programma che permetta di gestire cartelle e file di un computer. Tutte le classi devono appartenere al package <code><B>computer</B></code>.
+<p>
+Il programma interagisce attraverso istanze della classe <code><B>Computer</B></code>.
+    
+<h2>R1. Computer e cartelle</h2>
+
+La classe principale con cui interagire &egrave; <code><B>Computer</B></code>, che riceve come parametro del costruttore la dimensione dell'hard disk in KB (si assuma che un computer possa avere un solo hard disk). 
+&Egrave; possibile accedere a tale informazione tramite il metodo getter <code><B>getDimensioneHardDisk()</B></code>.<br>
+    
+Il computer pu&ograve; memorizzare cartelle e file. Alla creazione, ogni computer deve essere automaticamente dotato di una cartella con nome <i>root</i>, che conterr&agrave; al suo interno tutte le cartelle e sotto-cartelle successivamente create. Tale cartella &egrave; accessibile tramite il metodo <code><B>getRoot()</B></code>.<br>
+    
+Per creare una cartella, si utilizza il metodo <code><B>creaCartella()</B></code> della classe <code><B>Computer</B></code>, che riceve come parametri il nome della cartella che si vuole creare e un oggetto di tipo <code><B>Cartella</B></code>, che rappresenta la cartella all'interno della quale verr&agrave; salvata la cartella appena creata. Tale metodo deve permettere la creazione di una cartella se e solo se all'interno della cartella contenitore non esiste nessuna cartella con nome uguale a quello passato come parametro al metodo. Qualora sia gi&agrave; presente una cartella con lo stesso nome, il sistema deve ignorare la richiesta.<br>
+    
+&Egrave; possibile cercare una cartella contenuta all'interno di un'altra cartella tramite il metodo <code><B>cercaCartella()</B></code>, che riceve come parametri il nome della cartella cercata e la cartella all'interno della quale effettuare la ricerca. Tale metodo confronta il nome della cartella cercata con quelli delle cartelle contenute nella cartella contenitore e restituisce le informazioni relative all'oggetto trovato (riportando il nome della cartella e il nome della cartella superiore separati da "-", ad esempio <i>Documents-root</i>) se e solo se il nome coincide. Qualora non sia identificata nessuna cartella con quel nome, il metodo restituisce una stringa vuota.<br>
+    
+<i>NB: all'inizio e alla fine della stampa restituita dal metodo cercaCartella non devono essere presenti spazi ne' caratteri speciali</i><BR>
+
+
+<h2>R2. File semplici</h2>
+
+Le cartelle possono contenere file. I file possono essere semplici, oppure speciali (cio&egrave; file che presentano informazioni aggiuntive).<br>
+I file semplici sono aggiunti a una cartella tramite il metodo <code><B>creaFile()</B></code> della classe <code><B>Computer</B></code>, che riceve come parametri il nome del file da creare, la cartella all'interno della quale verr&agrave; salvato il file creato e la dimensione in KB e restituisce l'oggetto appena creato. In maniera analoga al metodo <code><B>creaCartella()</B></code>, tale metodo permette di creare un file solo se non esiste nessun altro file con il nome specificato, all'interno della cartella.<br>
+    
+Come per il metodo <code><B>cercaCartella()</B></code>, il metodo <code><B>cercaFile()</B></code> permette di cercare un file contenuto in una cartella e ottenerne le informazioni. Tale metodo restituisce una stringa contenente nome del file, nome della cartella superiore e dimensione, separati da un "-" (ad esempio <i>documento1-Documents-10020</i>).
+
+<h2>R3. File speciali</h2>
+
+Oltre ai file semplici, esistono dei file speciali (file audio e immagini) per i quali sono memorizzate informazioni aggiuntive. <br>
+In particolare, i file audio presentano informazioni sui minuti e i secondi di durata del brano (oltre alle informazioni specificate per i file semplici), mentre i file immagine memorizzano informazioni relative all'altezza e larghezza in pixel dell'immagine, e al dispositivo utilizzato per acquisire l'immagine.<br>
+Entrambi i tipi di file speciali possono essere creati e aggiunti a una cartella tramite i metodi <code><B>creaFileAudio()</B></code> e <code><B>creaFileImmagine()</B></code> rispettivamente, che ricevono come parametri, nel caso di un file audio nome del file, cartella superiore, dimensione, minuti e secondi di durata, e nel caso di una immagine, nome del file, cartella superiore, dimensione, altezza, larghezza e modello del dispositivo utilizzato.<br>
+In maniera analoga alla creazione di un file semplice, tali metodi permettono di creare un nuovo file solo se non sono presenti all'interno della cartella altri file con lo stesso nome.
+<br>
+Infine, come per i file semplici, il metodo <code><B>cercaFile()</B></code> permette di cercare un file audio o immagine contenuto in una cartella e ottenerne le informazioni. Tale metodo restituisce per i file audio una stringa contenente nome del file, nome della cartella superiore, dimensione, minuti e secondi di durata separati da un "-" (ad esempio <i>audio1-Audio-20809-2-53</i>), e per le immagini una stringa contenente nome del file, nome della cartella superiore, dimensione, altezza, larghezza e modello del dispositivo utilizzato separati da un "-" (ad esempio <i>gruppo-Estate2015-8957-2304-3456-Canon EOS</i>).
+    
+<h2>R4. Elenco file e calcolo dimensione occupata</h2>
+
+Le informazioni relative ai file contenuti in una cartella possono essere visualizzate tramite il metodo <code><B>elencoFileCartella()</B></code>. Tale metodo riceve come parametro l'oggetto relativo alla cartella della quale si vogliono visualizzare i file, e restituisce una stringa contenente le informazioni relative ai file contenuti, riportati uno per riga (tutte le righe, compresa l'ultima, terminano con "\n"), nello stesso formato specificato per il metodo <code><B>cercaFile()</B></code>.<br>I file vanno riportati nell'ordine di inserimento, ad esempio:<br>
+<i>audio1-Audio-20809-2-53<br>
+audio2-Audio-32398-4-12<br>
+lista canzoni-Audio-5009</i><br><br>
+
+&Egrave; possibile conoscere la dimensione occupata da una cartella e dal suo contenuto (file e cartelle contenuti in essa e/o nelle sue sotto-cartelle) tramite il metodo <code><B>calcolaDimensioneOccupata()</B></code>. Tale metodo riceve come parametro un oggetto di tipo Cartella e restituisce la dimensione occupata da essa e dal suo contenuto. Si ipotizzi che ogni cartella vuota occupi uno spazio di 10 KB.<br><br>
+    
+<i>NB: si assuma che ogni cartella non possa contenere, al suo interno pi&ugrave; di 500 cartelle e di 500 file.</i>
+    
+<hr style="width: 100%; height: 2px;"><br>
+
+
+</body>
+</html>

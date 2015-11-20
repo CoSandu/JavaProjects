@@ -1,0 +1,12 @@
+ZIPs/
+.metadata/
+.recommenders/
+regex_per_kml/
+.idea/
+utils/
+multilingual/
+*.zip
+*.sde
+*.pyc
+*.gdb
+*~

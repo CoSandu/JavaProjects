@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Requisiti</title>
+</head>
+<body>
+<h1 style="text-align: center;">Distributore automatico<br>
+</h1>
+Sviluppare un programma per la gestione di un distributore automatico.<br>
+Tutte le classi si trovano nel package <code>distributore</code><br>
+<br>
+<hr style="width: 100%; height: 2px;">
+<h2>R1: Snack</h2>
+Un distributore automatico &egrave; rappresentato da un oggetto di classe <code>Distributore</code> e permette di memorizzare le informazioni relative agli snack contenuti nel distributore.<br>  
+Gli snack sono caratterizzati da codice, nome, prezzo e tipologia (dolce o salato). <br>
+Di seguito &egrave; riportato un esempio di snack:<br>
+<br>
+    
+<table cellpadding="2" cellspacing="2" border="1"
+ style="text-align: left;">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><span style="font-weight: bold;">Codice</span><br>
+      </td>
+      <td style="vertical-align: top; font-weight: bold;">Nome<br>
+      </td>
+      <td style="vertical-align: top; font-weight: bold;">Prezzo</td>
+      <td style="vertical-align: top; font-weight: bold;">Tipologia</td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">taralli1<br>
+      </td>
+      <td style="vertical-align: top;">Taralli all'olio<br>
+      </td>
+      <td style="vertical-align: top;">0.35<br>
+      </td>
+      <td style="vertical-align: top;">salato<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">wafer1<br>
+      </td>
+      <td style="vertical-align: top;">Wafer alla nocciola<br>
+      </td>
+      <td style="vertical-align: top;">0.40<br>
+      </td>
+      <td style="vertical-align: top;">dolce<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">fiesta<br>
+      </td>
+      <td style="vertical-align: top;">Fiesta<br>
+      </td>
+      <td style="vertical-align: top;">0.6<br>
+      </td>
+      <td style="vertical-align: top;">dolce<br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+Il metodo <code>aggiungiSnack()</code> della classe <code>Distributore</code> permette di aggiungere uno snack, specificandone il codice, il nome, il prezzo e la tipologia.<br>
+Inoltre, la stessa classe permette di conoscere, dato il codice di uno snack, il nome, il prezzo e la tipologia tramite i metodi <code>getNome()</code>, <code>getPrezzo()</code> e <code>getTipologia()</code>. Qualora non fosse possibile identificare la informazioni richieste, il metodo <code>getPrezzo()</code> ritorna 0.0, mentre i metodi <code>getNome()</code> e <code>getTipologia()</code> ritornano una stringa vuota.<br>
+
+<h2>R2: Tessere</h2>
+Gli utenti possono comprare snack per mezzo di tessere prepagate. Ogni tessera &egrave; caratterizzata da un codice (un numero intero) e memorizza il credito residuo.<br>
+
+Le tessere possono essere caricate tramite il metodo <code>caricaTessera()</code>, che riceve come parametro il codice della tessera da creare e il credito da caricare sulla tessera. Qualora la tessera non sia ancora presente nel sistema, questa viene creata e le viene assegnato il credito specificato, mentre, nel caso in cui questa sia gi&agrave; presente, il sistema deve aggiornarne il credito, sommando al credito precedente l'importo versato.<br>
+
+&Egrave; possibile sapere il credito di una tessera tramite il metodo <code>getCredito()</code>, che ritorna il credito disponibile oppure 0.0, qualora non sia possibile identificare la tessera corrispondente al codice specificato.<br>
+
+
+<h2>R3: Colonne</h2>
+Gli snack sono inseriti nelle 10 colonne del distributore. Ogni colonna &egrave; identificata da un codice numerico compreso tra 1 e 10.<br>
+    
+La disponibilit&agrave; di una colonna pu&ograve; essere impostata tramite il metodo <code>impostaDisponibilitaColonna()</code>, che riceve come parametri il numero della colonna, il codice dello snack e il numero di snack inseriti nella colonna e ne imposta la disponibilit&agrave;. Differentemente da quanto specificato per il metodo <code>caricaTessera()</code>, tale metodo, nel caso una colonna sia gi&agrave; presente, sovrascrive la vecchia disponibilit&agrave; con il nuovo valore (senza verificare quale sia la vecchia disponibilit&agrave;).<br>
+
+Per ogni snack &egrave; possibile sapere il numero di confezioni disponibili in tutto il distributore tramite il metodo <code>getConfezioniDisponibili()</code>. Tale metodo riceve come parametro il codice dello snack e restituisce la disponibilit&agrave;, oppure 0, qualora non sia contenuto nessuno snack con quel codice. <br>
+Inoltre, &egrave; possibile conoscere il valore della merce contenuta all'interno del distributore tramite il metodo <code>getValoreMerceInDistributore()</code>, che calcola il valore della merce presente nel distributore, ovvero quanto si guadagnerebbe se tutti gli snack attualmente presenti nel distributore fossero venduti.
+    
+<h2>R4: Erogazione</h2>
+Gli utenti possono comprare uno snack tramite il metodo <code>eroga()</code>, specificando  il codice dello snack e quello della tessera con la quale pagare. Se entrambi i codici sono validi, se la tessera ha sufficiente credito e se il distributore contiene lo snack richiesto, viene effettuata l'erogazione dello snack e calcolato il nuovo credito della tessera. Tale metodo, nel caso in cui l'operazione vada a buon fine, restituisce il credito aggiornato; se la tessera non ha sufficiente credito, restituisce il credito precedente; se non &egrave; possibile identificare il codice della tessera, restituisce 0.0.
+
+<hr style="width: 100%; height: 2px;"><br>
+</body>
+</html>
