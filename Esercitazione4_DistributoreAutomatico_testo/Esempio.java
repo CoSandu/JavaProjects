@@ -15,9 +15,15 @@ public class Esempio {
 		distributore.aggiungiSnack("bounty", "Bounty", 0.50, "dolce");
 		distributore.aggiungiSnack("fiesta", "Fiesta", 0.60, "dolce");
 
-		System.out.println("Snack taralli1: "+distributore.getNome("taralli1")+ ", prezzo: "+distributore.getPrezzo("taralli1"));
+		System.out.println("Snack taralli1: "+distributore.getNome("taralli1")+ 
+				", prezzo: "+distributore.getPrezzo("taralli1")+
+				", tipologia: "+distributore.getTipologia("taralli1"));
+		System.out.println("Snack wafer1: "+distributore.getNome("wafer1")+ 
+				", prezzo: "+distributore.getPrezzo("wafer1")+
+				", tipologia: "+distributore.getTipologia("wafer1"));
 
 	    distributore.caricaTessera(3, 3.0);
+//	    System.out.println("Tessera: "+ distributore.getCredito(3));
 	    distributore.caricaTessera(53, 2.5);
 	    distributore.caricaTessera(11, 6.3);
 	    

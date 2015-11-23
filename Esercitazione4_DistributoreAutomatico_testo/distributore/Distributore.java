@@ -1,17 +1,22 @@
 package distributore;
-import java.util.List;
 
 public class Distributore {
+	private Snack snacks[];
+	private int sAtt;
+	private final static int MAXSNACK=10;
 	
-	private List colonne[];
-	private int MAX_COLONNE = 10;
   /**
    * Costruttore del distributore automatico
    */
+	
   public Distributore() {
+	  snacks = new Snack[MAXSNACK];
+	  sAtt = 0;
+
   }
 
-  /**
+
+/**
    * Aggiunge uno snack al
    * distributore.
    * @param codiceSnack codice dello snack
@@ -20,6 +25,9 @@ public class Distributore {
    * @param tipologiaSnack tipologia dello snack (dolce/salato)
    */
   public void aggiungiSnack(String codiceSnack, String nomeSnack, double prezzoSnack, String tipologiaSnack) {
+	  Snack s = new Snack(codiceSnack, nomeSnack, prezzoSnack, tipologiaSnack);
+	  snacks[sAtt] = s;
+	  sAtt++;
   }
   
   /**
@@ -29,7 +37,12 @@ public class Distributore {
    * @return prezzo dello snack (se non trovato, ritorna 0.0)
    */
   public double getPrezzo(String codiceSnack) {
-	  return 0.0;
+	  double prezzo = 0.0;
+	  for (Snack s:snacks){
+		  if(s!=null && s.getCodice().equalsIgnoreCase(codiceSnack))
+			  prezzo += s.getPrezzoSnack();
+	  }
+	  return prezzo;
   }
 
   /**
@@ -39,7 +52,12 @@ public class Distributore {
    * @return nome dello snack (se non trovato, ritorna "")
    */
   public String getNome(String codiceSnack) {
-	  return "";
+	  String nome = "";
+	  for (Snack s:snacks){
+		  if (s!=null && s.getCodice().equalsIgnoreCase(codiceSnack))
+			  nome+=s.getNome();
+	  }
+	  return nome;
   }
 
   /**
@@ -49,7 +67,12 @@ public class Distributore {
    * @return tipologia dello snack (se non trovato, ritorna "")
    */
   public String getTipologia(String codiceSnack) {
-	  return "";
+	  String tipologia = "";
+	  for (Snack s:snacks){
+		  if (s!=null && s.getCodice().equalsIgnoreCase(codiceSnack))
+			  tipologia+=s.getTipologiaSnack();
+	  }
+	  return tipologia;
   }
 
   /**
@@ -59,6 +82,8 @@ public class Distributore {
    * @param ricarica valore da caricare sulla tessera
    */
   public void caricaTessera(int codiceTessera, double ricarica) {
+	  Tessera t = new Tessera(codiceTessera, ricarica);
+	  t.aggiungiTessera(codiceTessera);
   }
 
   /**
@@ -67,7 +92,12 @@ public class Distributore {
    * @return credito corrispondente, oppure 0.0
    */
   public double getCredito(int codiceTessera) {
-	  return 0.0;
+	  double credito = 0.0;
+//	  for (Tessera t:){
+//		  if(t!=null && t.getCodiceTessera() == codiceTessera)
+//			  credito+=t.getRicarica();
+//	  }
+	  return credito;
   }
 
   /**

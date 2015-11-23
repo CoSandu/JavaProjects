@@ -45,6 +45,5 @@ public class Snack {
 		this.tipologiaSnack = tipologiaSnack;
 	}
 	
-	
 
 }
