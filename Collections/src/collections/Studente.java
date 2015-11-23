@@ -53,7 +53,8 @@ public class Studente {
 
 	public boolean equals(Object obj) { //mai cambiare la firma
 		Studente altros = (Studente) obj; //operazione di downcast perche' aumento la specificita' di object 
-		if(this.matricola == altros.matricola && this.name.compareTo(altros.name)==0&&
+		if(this.matricola == altros.matricola && 
+				this.name.compareTo(altros.name)==0 &&
 				this.cognome.compareTo(altros.cognome)==0 &&
 				this.media == altros.media)
 			return true;
