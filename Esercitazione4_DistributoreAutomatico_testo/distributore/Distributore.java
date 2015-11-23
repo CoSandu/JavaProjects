@@ -1,7 +1,10 @@
 package distributore;
+import java.util.List;
 
 public class Distributore {
 	
+	private List colonne[];
+	private int MAX_COLONNE = 10;
   /**
    * Costruttore del distributore automatico
    */
