@@ -1,18 +1,25 @@
 package distributore;
 
+import java.util.LinkedList;
+import java.util.List;
+
 public class Distributore {
-	private Snack snacks[];
-	private int sAtt;
-	private final static int MAXSNACK=10;
+	private List <Snack> snacks;
+	private List <Tessera> tessere;
 	
+	private Colonna colonne[];
+	private final static int MAXCOL = 10;
+	private int colAtt;
   /**
    * Costruttore del distributore automatico
    */
 	
   public Distributore() {
-	  snacks = new Snack[MAXSNACK];
-	  sAtt = 0;
-
+	 snacks = new LinkedList<Snack>();	  
+	 tessere = new LinkedList<Tessera>();
+	 
+	 colonne = new Colonna[MAXCOL];
+	 this.colAtt = 0;
   }
 
 
@@ -26,8 +33,7 @@ public class Distributore {
    */
   public void aggiungiSnack(String codiceSnack, String nomeSnack, double prezzoSnack, String tipologiaSnack) {
 	  Snack s = new Snack(codiceSnack, nomeSnack, prezzoSnack, tipologiaSnack);
-	  snacks[sAtt] = s;
-	  sAtt++;
+	  snacks.add(s);
   }
   
   /**
@@ -74,6 +80,18 @@ public class Distributore {
 	  }
 	  return tipologia;
   }
+  
+  /**
+   * Controlla l'esistenza di tessere nel sistema
+   * @param codiceTessera
+   */
+  public Tessera getEsistente(int codiceTessera){
+	  for (Tessera t:tessere){
+		  if (t!=null && t.getCodiceTessera() == codiceTessera)
+			  return t;
+	  }
+	  return null;
+  }
 
   /**
    * Carica una tessera specificando il codice ed il credito
@@ -82,8 +100,15 @@ public class Distributore {
    * @param ricarica valore da caricare sulla tessera
    */
   public void caricaTessera(int codiceTessera, double ricarica) {
-	  Tessera t = new Tessera(codiceTessera, ricarica);
-	  t.aggiungiTessera(codiceTessera);
+	  if (this.getEsistente(codiceTessera)==null){
+		  Tessera t = new Tessera(codiceTessera, ricarica);
+		  tessere.add(t);
+	  }
+	  else{
+		  Tessera t = this.getEsistente(codiceTessera);
+		  t.setRicarica(ricarica + t.getRicarica());
+	  }  		  
+	  		  
   }
 
   /**
@@ -93,13 +118,39 @@ public class Distributore {
    */
   public double getCredito(int codiceTessera) {
 	  double credito = 0.0;
-//	  for (Tessera t:){
-//		  if(t!=null && t.getCodiceTessera() == codiceTessera)
-//			  credito+=t.getRicarica();
-//	  }
+	  for (Tessera t:tessere){
+		  if(t!=null && t.getCodiceTessera() == codiceTessera)
+			  credito+=t.getRicarica();
+	  }
 	  return credito;
   }
 
+  /**
+   * Restituisco lo snack in base ad un codice di input
+   * @param codiceSnack
+   * @return oggetto snack ricercato, oppure null
+   */
+  public Snack getSnackFromCode(String codiceSnack){
+	  for (Snack s:snacks){
+		  if (s.getCodice() == codiceSnack)
+			  return s;
+	  }
+	  return null;
+  }
+  
+  /**
+  * Controlla l'esistenza delle colonne già presenti
+  * @param numeroColonna
+  * @return l'oggetto colonna se già presente, oppure null
+  */
+ public Colonna getEsistenteColonna(int numeroColonna){
+	  for (Colonna c:colonne){
+		  if (c!=null && c.getCodCol() == numeroColonna)
+			  return c;
+	  }
+	  return null;
+ }
+  
   /**
    * Imposta il contenuto di una colonna di snack
    * del distributore
@@ -109,7 +160,28 @@ public class Distributore {
    */
   public void impostaDisponibilitaColonna(int numeroColonna, String codiceSnack,
 		  int numeroSnack) {
+	  if (this.getEsistenteColonna(numeroColonna)==null){
+		  int completo = 0;
+		  Colonna c = new Colonna(numeroColonna);
+		  while (completo < numeroSnack){
+			  c.addSnack(getSnackFromCode(codiceSnack));
+			  completo++;
+	  }
+		  colonne[colAtt] = c;
+		  colAtt++;
+	  }
+	  else {
+		  int completo = 0;
+		  Colonna c = new Colonna(numeroColonna);
+		  while (completo < numeroSnack){
+			  c.addSnack(getSnackFromCode(codiceSnack));
+			  completo++;
+	  }
+		  colonne[c.writeColonna(numeroColonna)-1] = c;
+	  }
+
   }
+  
 
   /**
    * Resituisce il numero di confezioni disponibili per un dato
@@ -118,7 +190,13 @@ public class Distributore {
    * @return numero di confezioni disponibili nel distributore
    */
   public int getConfezioniDisponibili(String codiceSnack)  {
-	  return 0;
+	  int confDisp =0;
+	  for (Colonna c:colonne){
+		  if(c!=null){
+			  confDisp += c.listLenght(codiceSnack);
+		  }
+	  }
+	  return confDisp;
   }
 
   /**
@@ -126,7 +204,13 @@ public class Distributore {
    * @return valore della merce contenuta
    */
   public double getValoreMerceInDistributore(){
-	  return 0.0;
+	  double pTot=0.0;
+	  for (Colonna c:colonne){
+		  if(c!=null){
+			  pTot+=c.merceDist();
+		  }
+	  }
+	  return pTot;
   }
 
   /**
