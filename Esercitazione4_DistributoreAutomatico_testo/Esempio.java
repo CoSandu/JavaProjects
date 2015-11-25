@@ -41,17 +41,20 @@ public class Esempio {
 //	    System.out.println("Credito tessera con codice: "+distributore.getEsistente(3).getCodiceTessera()
 //	    		+" e' "+ distributore.getCredito(3));
 	    distributore.caricaTessera(11, 6.3);
-//	    System.out.println("Credito tessera con codice: "+distributore.getEsistente(11).getCodiceTessera()
-//	    		+" e' "+ distributore.getCredito(11));
+	    System.out.println("Credito tessera con codice: "+distributore.getEsistente(11).getCodiceTessera()
+	    		+" e' "+ distributore.getCredito(3));
+	    distributore.caricaTessera(1, 0.01);
 	    
 	    distributore.impostaDisponibilitaColonna(1, "taralli1", 1);
 	    distributore.impostaDisponibilitaColonna(2, "arachidi", 9);
 	    distributore.impostaDisponibilitaColonna(3, "wafer1", 11);
 	    distributore.impostaDisponibilitaColonna(4, "bounty", 1);
 	    distributore.impostaDisponibilitaColonna(5, "fiesta", 1);
-	    distributore.impostaDisponibilitaColonna(6, "taralli3", 1);
-	    System.out.println(distributore.getConfezioniDisponibili("taralli3"));
-	    System.out.println(distributore.getValoreMerceInDistributore());
+	    distributore.impostaDisponibilitaColonna(6, "taralli3", 15);
+	    distributore.impostaDisponibilitaColonna(8, "taralli3", 15);
+//	    System.out.println(distributore.getConfezioniDisponibili("taralli3"));
+//	    System.out.println(distributore.getValoreMerceInDistributore());
+	    System.out.println(distributore.eroga("taralli1", 1));
 	    
 	}
 }

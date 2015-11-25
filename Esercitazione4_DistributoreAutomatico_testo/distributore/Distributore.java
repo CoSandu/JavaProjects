@@ -10,6 +10,7 @@ public class Distributore {
 	private Colonna colonne[];
 	private final static int MAXCOL = 10;
 	private int colAtt;
+	
   /**
    * Costruttore del distributore automatico
    */
@@ -219,6 +220,21 @@ public class Distributore {
    * Qualora non fosse stata identificata nessuna tessera con quel codice, ritorna 0.0.
    */
   public double eroga(String codiceSnack, int codiceTessera) {
-	  return 0.0;
+	  double creT = 0.0;
+	  if(this.getEsistente(codiceTessera)!=null && 
+			  this.getTipologia(codiceSnack)!="" &&
+			  this.getCredito(codiceTessera)!=0.0){
+		  Tessera t = this.getEsistente(codiceTessera);
+		  double s = this.getPrezzo(codiceSnack);
+		  if (t.getRicarica()>s){
+			  t.setRicarica(t.getRicarica() - s);
+			  creT+= t.getRicarica();
+		  }
+		  else{
+			  creT+=t.getRicarica();
+		  }
+	  }
+		  
+	  return creT;
   }
 }

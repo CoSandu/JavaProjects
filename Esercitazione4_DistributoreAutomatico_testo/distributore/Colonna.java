@@ -6,7 +6,7 @@ import java.util.List;
 public class Colonna {
 
 	private int codCol;
-	protected List <Snack> snacks;
+	private List <Snack> snacks;
 	
 	public Colonna(int codCol) {
 		this.codCol = codCol;
