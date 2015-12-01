@@ -1,11 +1,17 @@
 package palestre;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class GestionePalestre {
-
+	
+	Map<String,Clienti> clienti = new HashMap<String,Clienti>();
+	
 	public Persona aggiungiPersona(String nome, String cognome, String cf) {
-		return null;
+		Clienti p = new Clienti (nome, cognome, cf);
+		clienti.put(cf, p);
+		return p;
 	}
 
 	public Persona getPersona(String cf) throws ErrPersonaInesistente {
