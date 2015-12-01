@@ -1,0 +1,156 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+
+<head>
+
+  <title>Palestre</title>
+
+</head>
+
+<body>
+
+<h1 style="text-align: center;">Palestre<br>
+
+</h1>
+
+Sviluppare un programma che permetta di gestire clienti e personal trainer di una catena di palestre.<br>
+
+Tutte le classi si trovano nel package <code>palestre</code>.<br>
+
+<br>
+
+<hr style="width: 100%; height: 2px;">
+
+<h2>R1: Clienti</h2>
+
+Il programma funziona attraverso la classe principale <code>GestionePalestre</code> e permette di inserire personal trainer e clienti all'interno del sistema di gestione palestre.<br>
+
+
+I clienti sono caratterizzati da nome, cognome e codice fiscale e implementano l'interfaccia <code>Persona</code>.<br>
+
+Le persone possono essere registrate presso il sistema tramite il metodo <code>aggiungiPersona()</code> che riceve come parametri nome, cognome e codice fiscale e restituisce l'oggetto appena creato, che implementa l'interfaccia <code>Persona</code>. Qualora uno dei tre parametri passati fosse <code>null</code>, oppure si cercasse di inserire una persona con codice fiscale gi&agrave; presente nel sistema, il metodo non deve permettere l'inserimento della persona e deve restituire <code>null</code>.<br>
+
+Per recuperare le informazioni sui clienti inseriti si pu&ograve; utilizzare il metodo <code>getPersona()</code> che riceve come parametro il codice fiscale e restituisce un oggetto che implementa l'interfaccia <code>Persona</code>.<br>
+
+Se non esiste nessuna persona con il codice fiscale specificato, viene generata un'eccezione di tipo <code>ErrPersonaInesistente</code>.<br>
+
+Il nome, il cognome e il codice fiscale della persona possono essere letti tramite i metodi <code>getNome()</code>, <code>getCognome()</code> e <code>getCodiceFiscale()</code> dell'interfaccia <code>Persona</code>.<br>
+
+
+<h2>R2: Personal trainers</h2>
+
+I personal trainers hanno le stesse caratteristiche dei clienti e sono inoltre
+
+caratterizzati da una matricola.<br>
+
+E' possibile registrare un personal trainer presso il sistema tramite il metodo <code>aggiungiPersonalTrainer()</code> che riceve come
+
+parametri matricola, nome, cognome e codice fiscale e restituisce l'oggetto appena creato, che implementa l'interfaccia <code>PersonalTrainer</code>. Qualora uno dei quattro parametri passati fosse <code>null</code>, oppure si cercasse di inserire un personal trainer con codice fiscale oppure matricola gi&agrave; presenti nel sistema, il metodo non deve permettere l'inserimento del personal trainer e deve restituire <code>null</code>.<br>
+
+Per recuperare le informazioni sui personal trainers si pu&ograve; utilizzare il
+
+metodo <code>getPersonalTrainer()</code> che riceve
+
+come parametro la matricola e restituisce
+
+un oggetto che implementa l'interfaccia <code>PersonalTrainer</code>.<br>
+
+Se nel sistema non &egrave; presente un personal trainer
+
+con la matricola specificata, viene generata un'eccezione
+
+di tipo <code>ErrPersonalTrainerInesistente</code>.<br>
+
+&Egrave; possibile conoscere la matricola di un personal trainer tramite il metodo <code>getMatricola()</code> dell'interfaccia
+
+<code>Personal Trainer</code>.<br>
+
+
+<h2>R3: Assegnazione Personal Trainer</h2>
+
+Ogni cliente del sistema di palestre pu&ograve; avere un personal trainer di riferimento. &Egrave; infatti possibile assegnare il personal trainer a un cliente tramite il metodo <code>assegnaPersonalTrainer() </code>della classe <code>GestionePalestre</code>, 
+
+che riceve come parametri la matricola del personal trainer e il codice fiscale
+
+del cliente. Tale metodo genera le opportune eccezioni
+
+(ErrPersonaInesistente, ErrPersonalTrainerInesistente) se la matricola o il codice fiscale
+
+non corrispondono a personal trainers/clienti inseriti nel sistema.<br>
+
+Deve essere possibile sapere, data una persona, qual &egrave; il personal trainer
+
+assegnato tramite il metodo <code>getPersonalTrainer()
+
+</code>dell'interfaccia <code>Persona</code>.<br>
+
+N.B. I personal trainer hanno accesso gratuito alle palestre della catena e possono essere a loro volta seguiti nella loro preparazione atletica da un personal trainer.<br>
+
+N.B. Si suppone che ogni persona sia seguita da un solo personal trainer (in caso di nuovo personal trainer, si sovrascrive l'informazione relativa al precedente). <br>
+
+N.B. Se la matricola e il codice fiscale passati al metodo <code>assegnaPersonalTrainer()</code> corrispondono allo stesso personal trainer, non deve essere possibile effettuare l'assegnazione (un personal trainer non pu&ograve; essere istruttore di se stesso). In questo caso il sistema si limita a ignorare la richiesta. 
+
+
+
+<h2>R4: Elenco clienti seguiti<br>
+
+</h2>
+
+Dato un personal trainer, deve essere possibile ottenere la lista dei suoi clienti
+
+tramite il metodo <code>getClienti() </code>dell'interfaccia
+
+<code>PersonalTrainer</code>. Tale lista deve essere fornita in ordine alfabetico
+
+crescente in base a cognome, nome e codice fiscale (possono esserci casi di omonimia).<br>
+
+Per ogni personal trainer &egrave; inoltre possibile ottenere la lista dei suoi clienti ordinandoli dal pi&ugrave; vecchio al pi&ugrave; giovane in base all'anno di nascita contenuto nel codice fiscale per mezzo del metodo <code>getClientiOrdinatiPerEtaDecrescente()</code> dell'interfaccia <code>PersonalTrainer</code>.<br>
+
+
+
+<h2>R5: Caricamento da file</h2>
+
+Tramite il metodo <code>caricaDati()</code>,
+
+che riceve come parametro il percorso di un file, deve essere possibile
+
+leggere da file i clienti e i personal trainers.<br>
+
+Il file &egrave; organizzato per righe e ogni riga pu&ograve; contenere un
+
+personal trainer o un cliente.<br>
+
+Le righe che contengono un cliente iniziano con la lettera "C" (o "c") seguita
+
+da nome, cognome e codice fiscale. Le righe che contengono un personal trainer
+
+iniziano con la lettera "P" (o "p") seguita da matricola, nome, cognome e
+
+codice fiscale. Gli elementi di ciascuna riga sono separati gli uni
+
+dagli altri tramite il carattere ";".<br>
+
+In caso di errore nelle informazioni presenti su una riga (ad esempio riga vuota, riga con alcuni dati mancanti, etc.) il metodo deve essere
+
+in grado di ignorarla e passare a quella successiva.<br>
+
+Il metodo ritorna una stringa nel formato: <br><br>
+
+<code>Numero di righe correttamente elaborate: <i>X</i> - numero di righe scartate: <i>Y</i> - numero di righe totali: <i>Z</i></code><br><br>
+
+con <i>X</i> pari al numero di righe formattate in maniera corretta (le cui informazioni sono state quindi inserite nel sistema), <i>Y</i> relativo al numero di righe che presentano errori (dalle quali non &egrave; quindi stato possibile estrapolare informazioni da inserire nel sistema), <i>Z</i> che fa riferimento al numero di righe totali del file. <br>
+
+
+
+In caso di errori di Input/Output il metodo scatena una IOException.<br>
+
+&nbsp;<br>
+<i>Suggerimento: per ottenere l'anno dal codice fiscale, si pu&ograve; utilizzare il metodo <code>substring(x, y)</code> che restituisce la porzione di una stringa compresa tra la x-esima posizione e la y-esima posizione</i>.
+
+<hr style="width: 100%; height: 2px;"><br>
+
+</body>
+
+</html>
+
