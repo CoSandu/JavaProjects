@@ -1,12 +1,12 @@
 package palestre;
 
-public class Clienti implements Persona {
+public class Cliente implements Persona {
 	
 	private String nome;
 	private String cognome;
 	private String codf;
 
-	public Clienti(String nome, String cognome, String codf) {
+	public Cliente(String nome, String cognome, String codf) {
 		this.nome = nome;
 		this.cognome = cognome;
 		this.codf = codf;
