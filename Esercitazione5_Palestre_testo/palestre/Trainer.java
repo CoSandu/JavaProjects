@@ -1,9 +1,10 @@
 package palestre;
 
-import java.util.Collection;
+import java.util.*;
 
 public class Trainer extends Cliente implements PersonalTrainer {
 	private String matricola;
+	private List<Persona> clienti = new LinkedList<Persona>();
 
 	public Trainer(String nome, String cognome, String codf, String mat) {
 		super(nome, cognome, codf);
@@ -17,8 +18,12 @@ public class Trainer extends Cliente implements PersonalTrainer {
 
 	@Override
 	public Collection<Persona> getClienti() {
-		// TODO Auto-generated method stub
-		return null;
+		Collections.sort(clienti);
+		return clienti;
+	}
+	
+	public void setCliente(Cliente c){
+		clienti.add(c);
 	}
 
 	@Override

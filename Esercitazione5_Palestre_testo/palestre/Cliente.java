@@ -5,6 +5,8 @@ public class Cliente implements Persona {
 	private String nome;
 	private String cognome;
 	private String codf;
+	
+	private PersonalTrainer trainer;
 
 	public Cliente(String nome, String cognome, String codf) {
 		this.nome = nome;
@@ -13,9 +15,12 @@ public class Cliente implements Persona {
 	}
 
 	@Override
-	public int compareTo(Persona arg0) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int compareTo(Persona pers) {
+		if(this.cognome.compareTo(pers.getCognome())!=0)
+			return this.cognome.compareTo(pers.getCognome());
+		if(this.nome.compareTo(pers.getNome())!=0)
+			return this.nome.compareTo(pers.getNome());
+		return this.codf.compareTo(pers.getCodiceFiscale());
 	}
 
 	@Override
@@ -35,12 +40,16 @@ public class Cliente implements Persona {
 
 	@Override
 	public PersonalTrainer getPersonalTrainer() {
-		// TODO Auto-generated method stub
-		return null;
+		return trainer;
 	}
 	
 	public String toString(){
 		return nome+" "+cognome+" "+" "+codf;
+	}
+
+
+	public void setTrainer(PersonalTrainer t) {
+		this.trainer = t;
 	}
 
 }

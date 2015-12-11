@@ -61,6 +61,7 @@ public class GestionePalestre {
 		Trainer t = new Trainer (nome, cognome, cf, matricola);
 		if (this.presenteTrainer(t)==false){
 			pTrainer.put(matricola, t);
+			clienti.put(cf, t);
 			return t;
 		}
 		return null;
@@ -74,6 +75,16 @@ public class GestionePalestre {
 	}
 
 	public void assegnaPersonalTrainer(String matricola, String cf) throws ErrPersonaInesistente, ErrPersonalTrainerInesistente {
+		if (pTrainer.containsKey(matricola)==false){ 
+			throw new ErrPersonalTrainerInesistente();
+		}
+		if (clienti.containsKey(cf)==false){ 
+			throw new ErrPersonaInesistente();
+		}
+		if (pTrainer.get(matricola).getCodiceFiscale().compareToIgnoreCase(cf)!=0){
+			((Cliente) clienti.get(cf)).setTrainer(pTrainer.get(matricola));
+			((Trainer) pTrainer.get(matricola)).setCliente((Cliente) clienti.get(cf));
+		}
 	}
 
 	public String caricaDati(String nomeFile) throws IOException {
