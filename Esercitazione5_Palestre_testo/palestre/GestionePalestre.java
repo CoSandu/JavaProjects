@@ -1,8 +1,7 @@
 package palestre;
 
 import java.io.*;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class GestionePalestre {
 	
@@ -89,7 +88,48 @@ public class GestionePalestre {
 
 	public String caricaDati(String nomeFile) throws IOException {
 		// modificare sostituendo a X, Y, Z i valori corretti
-		return "Numero di righe correttamente elaborate: X - numero di righe scartate: Y - numero di righe totali: Z";
+		int x = 0;
+		int y = 0;
+		int z = 0;
+ 		try {
+			BufferedReader br = new BufferedReader(new FileReader(nomeFile));
+			String row;
+			while((row=br.readLine())!=null ){
+				StringTokenizer st = new StringTokenizer(row,";");
+				try{
+					if(st.countTokens() == 0){
+						y++;
+					}
+					else{
+						String tipo = st.nextToken();
+						if(tipo.compareToIgnoreCase("C")==0||tipo!=""){
+							String nome = st.nextToken().trim();
+							String cognome = st.nextToken().trim();
+							String codf = st.nextToken().trim();
+							aggiungiPersona(nome, cognome, codf);
+						}
+						else if(tipo.compareToIgnoreCase("P")==0||tipo!=null){
+							String matricola = st.nextToken().trim();
+							System.out.println(matricola);
+							String nome = st.nextToken().trim();
+							String cognome = st.nextToken().trim();
+							String codf = st.nextToken().trim();
+							System.out.println(codf);
+							aggiungiPersonalTrainer(matricola, nome, cognome, codf);
+						}
+						x++;
+					}
+				}
+				catch(Exception ns){
+					ns.printStackTrace();
+				}
+			}
+		}
+ 		catch(Exception e){
+ 			e.printStackTrace();
+ 			
+ 		}
+		return "Numero di righe correttamente elaborate: "+x+" - numero di righe scartate: "+y+" - numero di righe totali: "+z;
 	}
   
 }

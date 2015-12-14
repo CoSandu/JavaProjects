@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 import palestre.*;
 
 public class ApplicazionePalestre {
@@ -38,6 +40,12 @@ public class ApplicazionePalestre {
 		
 		System.out.println(c1.getPersonalTrainer());
 		System.out.println(((PersonalTrainer) c9).getClienti());
+		try {
+			System.out.println(palestraStadio.caricaDati("elenco.txt"));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 
 	}
 
