@@ -49,6 +49,7 @@ public class ApplicazionePalestre {
 		}
 		
 		System.out.println(((PersonalTrainer) c9).getClientiOrdinatiPerEtaDecrescente());
+		System.out.println(((PersonalTrainer) c9).getClienti());
 		try {
 			System.out.println(palestraStadio.getPersonalTrainer("ZZ768A").getClientiOrdinatiPerEtaDecrescente());
 		} catch (ErrPersonalTrainerInesistente e) {

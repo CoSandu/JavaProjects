@@ -107,6 +107,7 @@ public class GestionePalestre {
 							String cognome = st.nextToken().trim();
 							String codf = st.nextToken().trim();
 							aggiungiPersona(nome, cognome, codf);
+							x++;
 						}
 						else if(tipo.compareToIgnoreCase("P")==0){
 							String matricola = st.nextToken().trim();
@@ -116,10 +117,10 @@ public class GestionePalestre {
 							String codf = st.nextToken().trim();
 							System.out.println(codf);
 							aggiungiPersonalTrainer(matricola, nome, cognome, codf);
+							x++;
 						}else{
 							y++;
 						}
-						x++;
 					}
 				}
 				catch(Exception ns){
