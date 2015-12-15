@@ -28,8 +28,14 @@ public class Trainer extends Cliente implements PersonalTrainer {
 
 	@Override
 	public Collection<Persona> getClientiOrdinatiPerEtaDecrescente() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Persona> clientiPerEta = new LinkedList<Persona>(clienti);
+		Collections.sort(clientiPerEta, new Comparator<Persona>(){
+			public int compare(Persona a, Persona b) {
+				return Integer.parseInt(a.getCodiceFiscale().substring(6, 8)) - 
+						Integer.parseInt(b.getCodiceFiscale().substring(6, 8));
+			}
+		});
+		return clientiPerEta;
 	}
 	
 	public String toString(){

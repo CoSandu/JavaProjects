@@ -102,13 +102,13 @@ public class GestionePalestre {
 					}
 					else{
 						String tipo = st.nextToken();
-						if(tipo.compareToIgnoreCase("C")==0||tipo!=""){
+						if(tipo.compareToIgnoreCase("C")==0){
 							String nome = st.nextToken().trim();
 							String cognome = st.nextToken().trim();
 							String codf = st.nextToken().trim();
 							aggiungiPersona(nome, cognome, codf);
 						}
-						else if(tipo.compareToIgnoreCase("P")==0||tipo!=null){
+						else if(tipo.compareToIgnoreCase("P")==0){
 							String matricola = st.nextToken().trim();
 							System.out.println(matricola);
 							String nome = st.nextToken().trim();
@@ -116,6 +116,8 @@ public class GestionePalestre {
 							String codf = st.nextToken().trim();
 							System.out.println(codf);
 							aggiungiPersonalTrainer(matricola, nome, cognome, codf);
+						}else{
+							y++;
 						}
 						x++;
 					}
@@ -129,6 +131,7 @@ public class GestionePalestre {
  			e.printStackTrace();
  			
  		}
+ 		z=x+y;
 		return "Numero di righe correttamente elaborate: "+x+" - numero di righe scartate: "+y+" - numero di righe totali: "+z;
 	}
   

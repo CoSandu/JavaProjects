@@ -44,7 +44,7 @@ public class Cliente implements Persona {
 	}
 	
 	public String toString(){
-		return nome+" "+cognome+" "+" "+codf;
+		return nome+" "+cognome+" "+codf;
 	}
 
 
