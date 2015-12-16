@@ -7,6 +7,8 @@ public class GestionePalestre {
 	
 	Map<String,Persona> clienti = new HashMap<String,Persona>();
 	Map<String,PersonalTrainer> pTrainer = new HashMap<String,PersonalTrainer>();
+	private int x;
+	private int y;
 	
 	public boolean presente(Persona p){
 		if (p.getCognome()==null || p.getCognome().length()==0
@@ -22,8 +24,11 @@ public class GestionePalestre {
 		Persona p = new Cliente (nome, cognome, cf);
 		if (this.presente(p)==false){
 			clienti.put(cf, p);
+			x++;
 			return p;
+			
 		}
+		y++;
 		return null;
 	}
 
@@ -61,8 +66,10 @@ public class GestionePalestre {
 		if (this.presenteTrainer(t)==false){
 			pTrainer.put(matricola, t);
 			clienti.put(cf, t);
+			x++;
 			return t;
 		}
+		y++;
 		return null;
 	}
 
@@ -88,8 +95,6 @@ public class GestionePalestre {
 
 	public String caricaDati(String nomeFile) throws IOException {
 		// modificare sostituendo a X, Y, Z i valori corretti
-		int x = 0;
-		int y = 0;
 		int z = 0;
  		try {
 			BufferedReader br = new BufferedReader(new FileReader(nomeFile));
@@ -107,17 +112,14 @@ public class GestionePalestre {
 							String cognome = st.nextToken().trim();
 							String codf = st.nextToken().trim();
 							aggiungiPersona(nome, cognome, codf);
-							x++;
+
 						}
 						else if(tipo.compareToIgnoreCase("P")==0){
 							String matricola = st.nextToken().trim();
-							System.out.println(matricola);
 							String nome = st.nextToken().trim();
 							String cognome = st.nextToken().trim();
 							String codf = st.nextToken().trim();
-							System.out.println(codf);
 							aggiungiPersonalTrainer(matricola, nome, cognome, codf);
-							x++;
 						}else{
 							y++;
 						}
