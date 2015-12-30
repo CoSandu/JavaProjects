@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Amazon</title>
+</head>
+<body>
+<h1 style="text-align: center;">Amazon<br>
+</h1>
+Sviluppare un programma per l'acquisto di prodotti, in un sistema di e-commerce.<br>
+Tutte le classi si trovano nel package <code>amazon</code>.<br>
+<br>
+<hr style="width: 100%; height: 2px;">
+<h2>R1: Prodotti<br>
+</h2>
+
+Il programma funziona attraverso la classe principale <code>Amazon</code>.
+&Egrave; possibile aggiungere nuovi prodotti tramite il metodo <code>aggiungiProdotto()</code> della classe <code>Amazon</code>. Tale metodo riceve come parametri nome, descrizione e prezzo di un prodotto, assegna automaticamente un codice (a partire da 0), crea un oggetto di tipo <code>Prodotto</code> e ritorna il codice assegnato al prodotto. Per ottenere un prodotto dato il codice del prodotto &egrave; possibile utilizzare il metodo <code>getProdotto</code> della medesima classe, che, ricevuto il codice di un prodotto, restituisce un riferimento all'oggetto di classe <code>Prodotto</code>, oppure genera una eccezione <code>ErrProdottoInesistente</code>, qualora non sia possibile risalire a nessun prodotto. 
+Inoltre, per ogni prodotto &egrave; possibile impostarne la disponibilit&agrave; tramite il metodo <code>impostaDisponibilitaProdotto()</code> della classe <code>Amazon</code>. Tale metodo riceve come parametri il codice di un prodotto e la disponibilit&agrave; e aggiorna la disponibilit&agrave; del relativo prodotto (eventualmente sommando alla disponibilit&agrave; precedente la nuova disponibilit&agrave;, qualora la disponibilit&agrave; precedente sia diversa da zero). In maniera simile al metodo <code>getProdotto</code>, tale metodo genera una eccezione <code>ErrProdottoInesistente</code>, qualora non sia possibile risalire al prodotto. <br>    
+I metodi <code>getCodice()</code>, <code>getNome()</code>, <code>getDescrizione()</code>, <code>getPrezzo()</code>, <code>getDisponibilita()</code> della classe <code>Prodotto</code> permettono di ottenere informazioni sul codice del prodotto, il nome, la descrizione, il prezzo e la disponibilit&agrave; del prodotto.
+
+<br>
+
+<h2>R2: Account</h2><br>
+Oltre ai prodotti, il sistema memorizza anche informazioni sugli account. In particolare, un account pu&ograve; essere inserito tramite il metodo <code>creaAccount()</code> della classe <code>Amazon</code>. Tale metodo riceve come parametri nome, cognome, username e password, crea un oggetto di tipo <code>Account</code> e, se l'operazione va a buon fine, ritorna lo username associato. Qualora, invece, sia gi&agrave; presente nel sistema un account con lo username specificato, tale metodo genera una eccezione di tipo <code>ErrAccountGiaEsistente</code>. 
+Per ottenere un account, &egrave; possibile utilizzare il metodo <code>getAccount</code> della medesima classe. Tale metodo riceve come parametri username e password e, se lo username &egrave; contenuto nel sistema, e se &egrave; stata specificata la password corretta, restituisce l'account corrispondente. Qualora, invece, i dati specificati siano errati, genera una eccezione <code>ErrDatiErrati</code>. 
+Per ogni account &egrave; inoltre possibile specificare uno o pi&ugrave; indirizzi di spedizione, tramite il metodo <code>aggiungiIndirizzoAdAccount()</code> della classe <code>Amazon</code>. Tale metodo riceve come parametri un account e la stringa contenente l'indirizzo di spedizione, e aggiunge l'indirizzo all'account (ignorando la richiesta, se l'indirizzo &egrave; gi&agrave; stato specificato, per quell'account).  <br>
+    
+I metodi <code>getNome()</code>, <code>getCognome()</code>, <code>getUserName()</code>, <code>getPassword()</code>, <code>elencoIndirizziSpedizione()</code> della classe <code>Account</code> permettono di ottenere informazioni sul nome, cognome, username e password, e l'elenco degli indirizzi associati.
+<br>
+
+<h2>R3: Acquisti<br>
+</h2>
+Gli utenti, tramite il loro account, possono effettuare acquisti. In particolare, essi possono aggiungere il prodotto al loro carrello tramite il metodo <code>aggiungiProdottoACarrelloAccount()</code>. Tale metodo riceve come parametri un account, un prodotto, e una quantit&agrave;. Se la quantit&agrave; richiesta &egrave; inferiore alla quantit&agrave; disponibile (cio&egrave; se c'&egrave; disponibilit&agrave; per quel prodotto), il prodotto viene aggiunto al carrello dell'account, altrimenti la richiesta viene ignorata. 
+&Egrave; possibile calcolare il totale del carrello tramite il metodo <code>getTotaleCarrello()</code> della classe <code>Account</code>, che calcola l'importo che una persona deve pagare quando effettua il checkout.
+    
+<h2>R4: Elenchi prodotti<br>
+</h2>
+Per ogni account, &egrave; possibile ottenere la lista dei prodotti tramite i metodi <code>elencoProdottiInOrdineDiInserimento</code> e <code>elencoProdottiPerImportoCrescente</code> (della classe <code>Account</code>), che restituiscono, rispettivamente una collezione di prodotti in ordine di inserimento (cio&egrave; di aggiunta al carrello), e una collezione di prodotti ordinati per importo crescente.    
+&Egrave; inoltre possibile ottere la lista di tutti i prodotti inseriti nel sistema tramite il metodo <code>elencoProdottiPerImportoCrescente()</code> della classe <code>Account</code>, che restituisce anch'esso i prodotti ordinati per importi crescenti. 
+    
+
+<h2>R5: Interfaccia Grafica</h2>
+Realizzare l'interfaccia grafica  simile alla
+seguente:<br>
+<br>
+<img style="width: 600px; height: 300px;" alt="Amazon"
+ src="Finestra1.png"><br>
+<br>
+Quando si avvia l'applicazione, l'utente deve specificare username e password (riquadro in alto a sinistra). Se i dati forniti sono corretti, il carrello (riquadro in alto a destra) viene popolato con gli elementi eventualmente gi&agrave; aggiunti al carrello (che l'utente non aveva ancora provveduto ad acquistare), e la combo box relativa agli indirizzi (in basso al centro) viene popolata con gli indirizzi specificati (Figura 2). Infine, nel riquadro in alto al centro, vengono mostrati tutti i prodotti inseriti nel sistema, ordinati dal pi&ugrave; economico al pi&ugrave; caro (i prodotti vengono mostrati sia che l'utente abbia effettuato l'accesso, sia nel caso in cui questo non sia ancora loggato).<br>
+NB: i prodotti devono essere riportati nel seguente formato <code>codice-nome-descrizione-prezzo-quantit&agrave;</code> (come da figura).
+
+<br>
+<img style="width: 600px; height: 300px;" alt="Login andato a buon fine"
+ src="Finestra2.png"><br>
+<br>
+
+Un utente, qualora voglia acquistare un prodotto, pu&ograve; selezionarlo dalla lista riportata nel quadrante in alto al centro, e cliccare sul pulsante "Aggiungi al carrello". L'interfaccia grafica verr&agrave; automaticamente aggiornata, aggiungendo il prodotto selezionato al carrello (Figura 3, riquadri in alto al centro e a sinistra).<br>
+Qualora un utente volesse procedere all'acquisto, pu&ograve; cliccare sul bottone "Acquista i prodotti", che permette di calcolare il totale del carrello, e lo fa visualizzare nel riquadro in basso a sinistra (Figura 3).
+Infine, per effettuare la spedizione, l'utente pu&ograve; selezionare l'indirizzo di preferenza dalla combo box posta nel riquadro in basso al centro, e poi cliccare sul pulsante "Spedisci ordine".<br> 
+NB: i prodotti del carrello devono essere riportati nello stesso formato utilizzato per riportare i prodotti presenti nel sistema, ma la quantit&agrave; deve far riferimento alla quantit&agrave; aggiunta al carrello, e non alla disponibilit&agrave; di prodotti in tutto il sistema (come da figura).
+
+<br>
+<img style="width: 600px; height: 300px;" alt="Calcolo carrello"
+ src="Finestra3.png"><br>
+<br>
+
+Dopo questa operazione, nel quadrante in basso a destra verr&agrave; mostrato un messaggio di conferma formattato nel seguente modo: <code>"Tot: X, spedito in: YYY"</code>, con X totale del carrello e Y indirizzo (solo via, citt&agrave;, etc., senza concatenare nome e/o cognome del proprietario dell'account) (Figura 4).<br>
+
+    <br>
+<img style="width: 600px; height: 300px;" alt="Inserimento transazione"
+ src="Finestra4.png"><br>
+<br>
+
+
+<span style="font-weight: bold;">N.B. usare gli attributi forniti per consentire il test della classe mediante JUnit.</span><br>
+
+<span style="font-weight: bold;">N.B. non &egrave; necessario aggiornare la disponibilit&agrave; del prodotto nel sistema, una volta che l'utente ha provveduto all'acquisto.</span><br>
+<br>
+<span style="font-weight: bold;">Suggerimenti<br>
+</span>Per la scelta dell'indirizzo da utilizzare si usi un <code>JComboBox</code> ed il suo costruttore <code>JComboBox(Object[])</code>.<br>
+Per la lista di prodotti si usi un <code>JList</code>.
+Per aggiornare l'elenco si sfrutti il metodo <code>setListData(Object[])</code>.<br>
+L'elemento selezionato in una lista pu&ograve; essere ottenuto con il
+metodo <code>getSelectedValue()</code>.
+L'elemento selezionato in una combo box pu&ograve; essere ottenuto con il
+metodo <code>getSelectedItem()</code>.
+<br>
+<br>
+<span style="font-weight: bold;"></span>
+<hr style="width: 100%; height: 2px;"><br>
+</body>
+</html>
