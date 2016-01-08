@@ -2,24 +2,24 @@ package amazon;
 
 public class Prodotto {
 	
-
-
-	private int Codice=-1;
+	private int Codice;
 	private String Nome;
 	private String Descrizione;
 	private double Prezzo;
+	private int Disponibilita;
 	
 	public Prodotto(String nome, String descrizione, double prezzo) {
 		Nome = nome;
 		Descrizione = descrizione;
 		Prezzo = prezzo;
-		Codice++;
+		Disponibilita=0;
+		Codice=0;
 	}
-
+	
 	public int getCodice() {
 		return Codice;
 	}
-
+	
 	public String getNome() {
 		return Nome;
 	}
@@ -33,7 +33,18 @@ public class Prodotto {
 	}
 
 	public int getDisponibilita() {
-		return -1;
+		return Disponibilita;
 	}
+
+	public void setDisponibilita(int disponibilita) {
+		if (Disponibilita!=0){
+			Disponibilita = Disponibilita + disponibilita;
+		}
+		else{
+			Disponibilita = disponibilita;
+		}
+	}
+
+	
 
 }
