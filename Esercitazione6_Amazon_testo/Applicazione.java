@@ -3,6 +3,7 @@ import amazon.Amazon;
 import amazon.ErrAccountGiaEsistente;
 import amazon.ErrDatiErrati;
 import amazon.ErrProdottoInesistente;
+import amazon.FsGui;
 import amazon.Prodotto;
 
 public class Applicazione {
@@ -14,10 +15,9 @@ public class Applicazione {
 		a.aggiungiProdotto("cioccolato", "cioccolato bianco", 32.0);
 		System.out.println(a.getProdotto(0).getPrezzo());
 		Prodotto pata = a.getProdotto(0);
-		Prodotto cioc = a.getProdotto(1);
 		
 		a.impostaDisponibilitaProdotto(0, 12);
-		a.impostaDisponibilitaProdotto(0, 2);
+		a.impostaDisponibilitaProdotto(1, 6);
 		System.out.println(a.getProdotto(0).getDisponibilita());
 //		a.impostaDisponibilitaProdotto(1, 12);
 		
@@ -32,8 +32,10 @@ public class Applicazione {
 //		a.aggiungiIndirizzoAdAccount(a.getAccount("pipPa", "0000"), "Via Trino, 30");
 		System.out.println(acc1.elencoIndirizziSpedizione());
 		a.aggiungiProdottoACarrelloAccount(acc1, pata, 3);
-		a.aggiungiProdottoACarrelloAccount(acc1, cioc, 1);
 		System.out.println(acc1.getTotaleCarrello());
+		System.out.println("Ordine inserimento "+acc1.elencoProdottiInOrdineDiInserimento());
+		System.out.println(a.elencoProdottiPerImportoCrescente());
+//		FsGui view = new FsGui();
 	}
 
 }

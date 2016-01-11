@@ -1,17 +1,16 @@
 package amazon;
 
-import java.util.Collection;
 import java.util.*;
 
-public class Account {
+public class Account{
 	
 	private String Nome;
 	private String Cognome;
 	private String UserName;
 	private String Password;
-	private List<String> indirizi;
+	private List<String> indirizi = new LinkedList<String>();
 	
-	private Map<Integer, Prodotto>carrello;
+	private List<Prodotto> carrello = new LinkedList<Prodotto>();
 	private int Quantita;
 
 	public Account(String nome, String cognome, String userName, String password) {
@@ -19,8 +18,6 @@ public class Account {
 		Cognome = cognome;
 		UserName = userName;
 		Password = password;
-		indirizi = new LinkedList<String>();
-		carrello = new HashMap<Integer, Prodotto>();
 	}
 	
 	public String getNome() {
@@ -44,10 +41,11 @@ public class Account {
 	}
 
 	public Collection<Prodotto> elencoProdottiInOrdineDiInserimento(){
-		return null;
+		return carrello;
 	}
 	
 	public Collection<Prodotto> elencoProdottiPerImportoCrescente(){
+		
 		return null;
 	}
 	
@@ -56,14 +54,14 @@ public class Account {
 	}
 
 	public double getTotaleCarrello(){
-		for (Prodotto i:carrello.values()){
+		for (Prodotto i:carrello){
 			return i.getPrezzo()*getQuantita();
 		}
 		return 0.0;
 	}
 
 	public void setCarrello(Prodotto p, int Quantita) {
-		carrello.put(p.getCodice(), p);
+		carrello.add(p);
 		this.Quantita=Quantita;
 	}
 	

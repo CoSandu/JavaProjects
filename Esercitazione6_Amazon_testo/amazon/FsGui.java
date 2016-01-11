@@ -1,4 +1,5 @@
 package amazon;
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,7 +17,7 @@ public class FsGui extends JFrame {
 	  
 	 FsGui f = new FsGui();
   }
-
+  
   public Account account;
   public Amazon amazon = new Amazon();
   
@@ -31,10 +32,13 @@ public class FsGui extends JFrame {
   public JComboBox indirizzi; // quinto quadrante
   public JButton spedisciOrdine; // quinto quadrante
   public JLabel messaggioConferma; // sesto quadrante
+  private JLabel uName;
+  private JLabel pWord;
 
   public FsGui(){
 	  
   	super("Amazon");
+  	
   	
   	Prodotto pp1 = null; 
   	Prodotto pp2 = null; 
@@ -68,6 +72,30 @@ public class FsGui extends JFrame {
   	
   	// TODO: continuare.... 
   	// suggerimento: usare un GridLayout(2,3)
+  	
+  	this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+  	this.setSize(200, 600);
+  	
+  	GridLayout layout = new GridLayout(20,0);
+  	this.setLayout(layout);
+  	
+	this.add(uName = new JLabel("Username"));
+  	this.add(username = new JTextField()); // primo quadrante
+  	this.add(pWord = new JLabel("Password"));
+  	this.add(password = new JTextField()); // primo quadrante
+  	this.add(login = new JButton("Effettua il login")); // primo quadrante
+  	this.add(listaProdottiAmazon = new JList()); // secondo quadrante
+  	this.add(aggiungiACarrello = new JButton("Aggiungi al carrello")); // secondo quadrante
+  	this.add(listaProdottiCarrello = new JList()); // terzo quadrante
+  	this.add(acquista = new JButton("Acquista i prodotti")); //terzo quadrante
+  	this.add(totale = new JLabel("0.0")); // quarto quadrante
+  	this.add(indirizzi = new JComboBox()); // quinto quadrante
+  	this.add(spedisciOrdine = new JButton("Spedisci ordine")); // quinto quadrante
+  	this.add(messaggioConferma = new JLabel()); // sesto quadrante
+  	
+  	
+  	this.setVisible(true);
+ 
   }
  
 }

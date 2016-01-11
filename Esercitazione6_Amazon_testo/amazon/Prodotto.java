@@ -1,6 +1,6 @@
 package amazon;
 
-public class Prodotto {
+public class Prodotto implements Comparable<Prodotto> {
 	
 	private int Codice;
 	private String Nome;
@@ -8,14 +8,15 @@ public class Prodotto {
 	private double Prezzo;
 	private int Disponibilita;
 	
-	public Prodotto(String nome, String descrizione, double prezzo) {
+	public Prodotto(int codice,String nome, String descrizione, double prezzo) {
 		Nome = nome;
 		Descrizione = descrizione;
 		Prezzo = prezzo;
 		Disponibilita=0;
-		Codice=0;
+		Codice = codice;
 	}
 	
+
 	public int getCodice() {
 		return Codice;
 	}
@@ -45,6 +46,13 @@ public class Prodotto {
 		}
 	}
 
+	public String toString(){
+		return Codice+"-" + Nome+"-" + Descrizione+"-" + Prezzo+"-" + Disponibilita;
+	}
+	
+	public int compareTo(Prodotto p){
+		return (int) (this.getPrezzo()-p.getPrezzo());
+	}
 	
 
 }

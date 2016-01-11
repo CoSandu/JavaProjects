@@ -7,10 +7,12 @@ public class Amazon {
 	
 	Map<Integer, Prodotto>prodotti = new HashMap<Integer, Prodotto>();
 	Map<String, Account>accounts = new HashMap<String, Account>();
+	private int contatore=0;
 
 	public int aggiungiProdotto(String nome, String descrizione, double prezzo){
-		Prodotto p = new Prodotto(nome, descrizione, prezzo);
+		Prodotto p = new Prodotto(contatore, nome, descrizione, prezzo);
 		prodotti.put(p.getCodice(), p);
+		contatore++;
 		return p.getCodice();
 	}
 	
@@ -63,10 +65,15 @@ public class Amazon {
 		
 	}
 	
-	public Collection<Prodotto> elencoProdottiPerImportoCrescente(){
-		return null;
-	}
+	 public Collection<Prodotto> elencoProdottiPerImportoCrescente(){
 
+		Collection<Prodotto> lista = prodotti.values();
+		List<Prodotto> elenco = new LinkedList<Prodotto>(lista);
+	
+		Collections.sort(elenco);
+		return elenco;
+	}
+	 
 }
 
 
