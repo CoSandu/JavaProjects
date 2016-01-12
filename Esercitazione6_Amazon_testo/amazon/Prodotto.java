@@ -1,5 +1,7 @@
 package amazon;
 
+import java.util.Collection;
+
 public class Prodotto implements Comparable<Prodotto> {
 	
 	private int Codice;
@@ -15,7 +17,6 @@ public class Prodotto implements Comparable<Prodotto> {
 		Disponibilita=0;
 		Codice = codice;
 	}
-	
 
 	public int getCodice() {
 		return Codice;

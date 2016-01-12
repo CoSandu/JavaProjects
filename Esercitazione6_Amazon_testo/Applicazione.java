@@ -35,7 +35,7 @@ public class Applicazione {
 		System.out.println(acc1.getTotaleCarrello());
 		System.out.println("Ordine inserimento "+acc1.elencoProdottiInOrdineDiInserimento());
 		System.out.println(a.elencoProdottiPerImportoCrescente());
-//		FsGui view = new FsGui();
+		FsGui view = new FsGui();
 	}
 
 }

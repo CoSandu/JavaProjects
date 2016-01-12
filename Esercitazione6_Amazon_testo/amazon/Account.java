@@ -45,8 +45,13 @@ public class Account{
 	}
 	
 	public Collection<Prodotto> elencoProdottiPerImportoCrescente(){
-		
-		return null;
+		List<Prodotto> ordPrezzo = new LinkedList<Prodotto>(carrello);
+		Collections.sort(ordPrezzo, new Comparator<Prodotto>(){
+			public int compare(Prodotto a, Prodotto b) {
+				return (int) (a.getPrezzo()-b.getPrezzo());
+			}
+		});
+		return ordPrezzo;
 	}
 	
 	public int getQuantita(){
