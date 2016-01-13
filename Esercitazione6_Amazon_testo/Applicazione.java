@@ -32,10 +32,12 @@ public class Applicazione {
 //		a.aggiungiIndirizzoAdAccount(a.getAccount("pipPa", "0000"), "Via Trino, 30");
 		System.out.println(acc1.elencoIndirizziSpedizione());
 		a.aggiungiProdottoACarrelloAccount(acc1, pata, 3);
+		a.aggiungiProdottoACarrelloAccount(acc1, pata, 2);
 		System.out.println(acc1.getTotaleCarrello());
+		System.out.println(acc1.elencoProdottiPerImportoCrescente());
 		System.out.println("Ordine inserimento "+acc1.elencoProdottiInOrdineDiInserimento());
 		System.out.println(a.elencoProdottiPerImportoCrescente());
-		FsGui view = new FsGui();
+//		FsGui view = new FsGui();
 	}
 
 }

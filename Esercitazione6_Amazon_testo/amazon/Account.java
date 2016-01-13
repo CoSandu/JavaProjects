@@ -59,14 +59,18 @@ public class Account{
 	}
 
 	public double getTotaleCarrello(){
+		double totale = 0.0;
 		for (Prodotto i:carrello){
-			return i.getPrezzo()*getQuantita();
+			totale = totale + i.getPrezzo()*((Acquisto) i).getQuantita();
 		}
-		return 0.0;
+		return totale;
 	}
 
 	public void setCarrello(Prodotto p, int Quantita) {
-		carrello.add(p);
+		Acquisto a = new Acquisto(p.getCodice(), p.getNome(), p.getDescrizione(), 
+				p.getPrezzo(), Quantita);
+		a.setDisponibilita(p.getDisponibilita());
+		carrello.add(a);
 		this.Quantita=Quantita;
 	}
 	
