@@ -67,10 +67,15 @@ public class Account{
 	}
 
 	public void setCarrello(Prodotto p, int Quantita) {
+		if (carrello.contains(p)){
+			((Acquisto) carrello.get(p.getCodice())).setQuantita(Quantita);
+		}
+		else{
 		Acquisto a = new Acquisto(p.getCodice(), p.getNome(), p.getDescrizione(), 
 				p.getPrezzo(), Quantita);
 		a.setDisponibilita(p.getDisponibilita());
 		carrello.add(a);
+		}
 		this.Quantita=Quantita;
 	}
 	
