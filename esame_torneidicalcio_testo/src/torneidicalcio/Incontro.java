@@ -9,6 +9,7 @@ public class Incontro implements Comparable<Incontro>{
 	private int golCasa;
 	private int golOspite;
 	private String arbitro;
+	private int difReti;
 	
 	
 
@@ -21,6 +22,7 @@ public class Incontro implements Comparable<Incontro>{
 		this.golCasa = golCasa;
 		this.golOspite = golOspite;
 		this.arbitro = arbitro;
+		this.difReti = golCasa-golOspite;
 	}
 
 	public int getGiornata() {
@@ -60,5 +62,10 @@ public class Incontro implements Comparable<Incontro>{
 	public void setTorneo(Torneo torneo) {
 		this.torneo = torneo;
 	}
+
+	public int getDifReti() {
+		return difReti;
+	}
+	
 
 }

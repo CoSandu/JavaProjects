@@ -10,6 +10,7 @@ public class Squadra implements Comparable<Squadra>{
 	private String stadio;
 	
 	private static List<Tesserato>tesserati= new LinkedList<Tesserato>();
+	private List<Incontro>incontri = new LinkedList<Incontro>();
 
 
 	public Squadra(String nome, String citta, int anno, String stadio) {
@@ -47,10 +48,29 @@ public class Squadra implements Comparable<Squadra>{
 
 	public Collection<Tesserato> tesserati() {
 		List<Tesserato>ts = new LinkedList<Tesserato>(tesserati);
-//		Collections.sort(ts, new DirigentiCalciatoriComparator());
-
-		return ts;
+		List<Tesserato>dir = new LinkedList<Tesserato>();
+		List<Tesserato>calc = new LinkedList<Tesserato>();
+		Collections.sort(ts);
+		for(Tesserato t:ts){
+			if(t instanceof Dirigente)
+				dir.add(t);
+			else
+				calc.add(t);
+		}
+		List<Tesserato>gen = new LinkedList<Tesserato>(dir);
+		gen.addAll(calc);
+		return gen;
 	}
+
+	public void addIncontro(Incontro a) {
+		incontri.add(a);
+		
+	}
+
+	public Collection<Incontro> getIncontri() {
+		return incontri;
+	}
+
 	
 	
 

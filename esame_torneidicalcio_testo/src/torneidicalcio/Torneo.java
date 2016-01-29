@@ -7,7 +7,7 @@ public class Torneo {
 	private String nome;
 	private int numS;
 	
-	private static List<Squadra>sTorn = new LinkedList<Squadra>();
+	private List<Squadra>sTorn = new LinkedList<Squadra>();
 	private List<Incontro>incontri = new LinkedList<Incontro>();
 	
 	public Torneo(String nome, int numS) {
@@ -23,7 +23,7 @@ public class Torneo {
 		return numS;
 	}
 
-	public static void addSquadra(Squadra squadra) {
+	public void addSquadra(Squadra squadra) {
 		sTorn.add(squadra);
 		
 	}
@@ -44,5 +44,22 @@ public class Torneo {
 		Collections.sort(stemp);
 		return stemp;
 	}
+
+	public void setNumS(int numS) {
+		this.numS = numS;
+	}
+
+	public Collection<Incontro> incontriDifReti() {
+		List<Incontro>stemp = new LinkedList<Incontro>(incontri);
+		Collections.sort(stemp, new Comparator<Incontro>(){
+			public int compare(Incontro a, Incontro b){
+				return a.getDifReti()-b.getDifReti();
+			}
+		});
+		return stemp;
+	}
+
+	
+	
 
 }

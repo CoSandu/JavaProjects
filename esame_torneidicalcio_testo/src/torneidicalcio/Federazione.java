@@ -78,8 +78,10 @@ public class Federazione {
 	}
 	
 	public void iscriviSquadraTorneo(String nomeTorneo, String nomeSquadra){
-		if(tornei.containsKey(nomeTorneo)!=false && squadre.containsKey(nomeSquadra)!=false)
-			Torneo.addSquadra(squadre.get(nomeSquadra));
+		if(tornei.containsKey(nomeTorneo)!=false && squadre.containsKey(nomeSquadra)!=false && tornei.containsKey(nomeTorneo) && 
+				tornei.get(nomeTorneo).getNumeroSquadre() > 0)
+			tornei.get(nomeTorneo).addSquadra(squadre.get(nomeSquadra));
+			tornei.get(nomeTorneo).setNumS(tornei.get(nomeTorneo).getNumeroSquadre()-1);
 	}
 
 	public Collection<Squadra> elencoSquadreTorneo(String nomeTorneo){
@@ -91,36 +93,44 @@ public class Federazione {
 	}
 	
 	public int tesseramento(String nome, String cognome, String nomeSquadra, String ruolo) throws EccezioneErroreDatiTesseramento{
-		if(nome =="" && cognome=="" && nomeSquadra==""&& ruolo=="")
-			throw new EccezioneErroreDatiTesseramento();
-		Tesserato t = new Dirigente(codTess,nome, cognome, squadre.get(nomeSquadra), ruolo);
-		tesseratiMap.put(codTess, t);
-		Squadra.addTesserto(t);
-		tesserati.put(nome+cognome,t);
-		codTess++;
-		return t.getCod();
+		Tesserato t=null;
+		if(nome !="" && nome!=null && cognome!=""&& cognome!=null && nomeSquadra!="" && nomeSquadra!=null && ruolo!="" && ruolo!=null)	
+			t = new Dirigente(codTess,nome, cognome, squadre.get(nomeSquadra), ruolo);
+			tesseratiMap.put(codTess, t);
+			Squadra.addTesserto(t);
+			tesserati.put(nome+cognome,t);
+			codTess++;
+			if (t!=null)	
+				return t.getCod();
+			else
+				throw new  EccezioneErroreDatiTesseramento();
 	}
 
 	public int tesseramento(String nome, String cognome, String nomeSquadra, String ruolo, int numeroMaglia) throws EccezioneErroreDatiTesseramento{
-		if(nome =="" && cognome=="" && nomeSquadra==""&& ruolo=="" && numeroMaglia<0)
-			throw new EccezioneErroreDatiTesseramento();
-		Tesserato t = new Calciatore(codTess,nome, cognome, squadre.get(nomeSquadra), ruolo, numeroMaglia);
-		tesseratiMap.put(codTess, t);
-		Squadra.addTesserto(t);
-		tesserati.put(nome+cognome,t);
-		codTess++;
-		
-		return t.getCod();
+		Tesserato t=null;
+		if(nome !="" && nome!=null && cognome!=""&& cognome!=null && nomeSquadra!="" && nomeSquadra!=null && ruolo!="" && ruolo!=null && numeroMaglia>0)
+			t = new Calciatore(codTess,nome, cognome, squadre.get(nomeSquadra), ruolo, numeroMaglia);
+			tesseratiMap.put(codTess, t);
+			Squadra.addTesserto(t);
+			tesserati.put(nome+cognome,t);
+			codTess++;
+			if (t!=null)	
+				return t.getCod();
+			else
+				throw new  EccezioneErroreDatiTesseramento();
 	}
 	
 	public int tesseramento(String nome, String cognome, String sezione) throws EccezioneErroreDatiTesseramento{
-		if(nome =="" && cognome=="" && sezione=="")
-			throw new EccezioneErroreDatiTesseramento();
-		Tesserato t = new Arbitro(codTess,nome, cognome, sezione);
-		tesseratiMap.put(codTess, t);
-		tesserati.put(nome+cognome,t);
-		codTess++;
-		return t.getCod();
+		Tesserato t=null;
+		if(nome !="" && nome!=null && cognome!="" && cognome!=null && sezione!=""&& sezione!=null)
+			t = new Arbitro(codTess,nome, cognome, sezione);
+			tesseratiMap.put(codTess, t);
+			tesserati.put(nome+cognome,t);
+			codTess++;
+			if (t!=null)	
+				return t.getCod();
+			else
+				throw new  EccezioneErroreDatiTesseramento();
 	}
 	
 	public Tesserato cercaTesseratoPerNumeroTessera(int numeroTessera) throws EccezioneTesseratoInesistente{
@@ -150,10 +160,12 @@ public class Federazione {
 	}
 	
 	public Incontro nuovoIncontro(String nomeTorneo, int giornata, String nomeSquadraCasa, String nomeSquadraOspite, 
-			String risultato, String nomeArbitro, String cognomeArbitro){
+			String risultato, String nomeArbitro, String cognomeArbitro) throws NumberFormatException, EccezioneTesseratoInesistente{
 		Incontro a = new Incontro(tornei.get(nomeTorneo), giornata, squadre.get(nomeSquadraCasa), squadre.get(nomeSquadraOspite),
-				Integer.parseInt(risultato.substring(0, 1)), Integer.parseInt(risultato.substring(2, 3)),nomeArbitro + cognomeArbitro);
+				Integer.parseInt(risultato.substring(0, 1)), Integer.parseInt(risultato.substring(2, 3)),"("+nomeArbitro +" "+cognomeArbitro+", "+ ((Arbitro) this.cercaTesseratoPerNomeCognome(nomeArbitro, cognomeArbitro)).getSezione()+ ")");
 		tornei.get(nomeTorneo).addIncontro(a);
+		squadre.get(nomeSquadraCasa).addIncontro(a);
+		squadre.get(nomeSquadraOspite).addIncontro(a);
 		return a;
 	}
 
@@ -162,14 +174,48 @@ public class Federazione {
 	}
 
 	public Collection<Incontro> elencoIncontriPerDifferenzaReti(String nomeTorneo){
-		return null;
+		return tornei.get(nomeTorneo).incontriDifReti();
 	}
 
 	public int puntiSquadra(String nomeSquadra){
-		return -1;
+		int tot=0;
+		List<Incontro>incontriS = new LinkedList<Incontro>(squadre.get(nomeSquadra).getIncontri());
+		for(Incontro i:incontriS){
+			if (i.getSquadraCasa().getNome().compareTo(nomeSquadra)==0)
+				if (i.getNumeroGolSquadraCasa()-i.getNumeroGolSquadraOspite()==0)
+					tot+=1;
+				else if (i.getNumeroGolSquadraCasa()-i.getNumeroGolSquadraOspite()<0)
+					tot+=0;
+				else 
+					tot+=3;
+			else if(i.getSquadraOspite().getNome().compareTo(nomeSquadra)==0)
+				if (i.getNumeroGolSquadraCasa()-i.getNumeroGolSquadraOspite()==0)
+					tot+=1;
+				else if (i.getNumeroGolSquadraCasa()-i.getNumeroGolSquadraOspite()<0)
+					tot+=3;
+				else 
+					tot+=0;
+		}
+		return tot;
 	}
 	
 	public String classificaTorneo(String nomeTorneo){
-		return null;
+		Torneo t = tornei.get(nomeTorneo);
+		List<Classifica>c=new LinkedList<Classifica>();
+		String sa= "";
+		Classifica sc = null;
+		for(Squadra s:t.listaSTorn()){
+			sc = new Classifica(this.puntiSquadra(s.getNome()), s.getNome());
+			c.add(sc);
+		}
+		Collections.sort(c);
+		for(int i=0; i<c.size(); i++){
+			sa += c.get(i).toString();
+			if(i<c.size()-1)
+				sa+=";\n";
+			else
+				sa+=".";
+		}
+		return sa;
 	}
 }
