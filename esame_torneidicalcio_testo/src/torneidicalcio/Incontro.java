@@ -66,6 +66,4 @@ public class Incontro implements Comparable<Incontro>{
 	public int getDifReti() {
 		return difReti;
 	}
-	
-
 }
